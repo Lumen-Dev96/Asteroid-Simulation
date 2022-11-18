@@ -1,0 +1,123 @@
+body {
+    background-color: #191A29;
+    margin: 0;
+}
+header {
+    width: 100%;
+    height: 60px;
+}
+.title {
+    margin-top: 16px;
+    margin-left: 26px;
+    display: flex;
+    justify-content: center;
+    max-width: 200px;
+    align-items: center;
+}
+.title h1{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    /* identical to box height, or 14px */
+    letter-spacing: 0.2em;
+    color: #FFFFFF;
+}
+.title .icon-logo {
+    padding-right: 10px;
+    font-size: 24px;
+    color: white;
+}
+
+.tab {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    margin-top: 20px;
+    margin-left: 80px;
+}
+.divider {
+    border: 0.5px solid #33344B;
+    margin-top: 24px;
+    margin-bottom: 16px;
+}
+
+
+.tab-item {
+    width: 70px;
+    height: 66px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.tab-item .icon-miner, .tab-item .icon-planet, .tab-item .icon-asteroid{
+    color: white;
+    font-size: 30px;
+    top: 20%;
+    position: relative;
+}
+.tab-item.is-active {
+    box-sizing: border-box;
+    border: 1px solid #32334A;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+}
+.tab-item.is-active i {
+    color:#38D9A8;
+}
+.tab-icon-text {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    color: #9499C3;
+    margin-top: 5px;
+}
+
+.data-table {
+    width: 50%;
+}
+.data-table .miners-table, .data-table .asteroids-table, .data-table .planets-table {
+    width: 90%;
+    margin: 0 auto;
+}
+.table-header-cell {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 10px;
+    color: #FFFFFF;
+    border-bottom: 0.5px solid #9499C3 !important;
+}
+.table-cell {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    color: #9499C3;
+    border-bottom: 0.5px solid #9499C3 !important;
+}
+.el-table, .el-table__expanded-cell {
+    background-color: transparent !important;
+}
+.el-table th,
+.el-table tr,
+.el-table td {
+    background-color: transparent !important;
+}
+.el-table::before {
+    background-color: transparent !important;
+}
+
+.miner-name {
+    text-decoration-line: underline;
+    color: #FFFFFF;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 11px;
+    cursor: pointer;
+}

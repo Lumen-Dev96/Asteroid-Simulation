@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="asset/style/base.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+    <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+    <title>Asteroid Simulation</title>
+</head>
+<body>
+    <div id="app">
+    <header>
+        <div class="title">
+            <span class="icon-logo"></span>
+            <h1>BACKEND&nbsp;MINER</h1>
+        </div>
+    </header>
+
+    <div class="tab">
+        <div class="tab-item" :class="{'is-active': activeTab === 'miners'}" @click="toggleTab('miners')">
+            <i class="icon-miner"></i>
+            <span class="tab-icon-text">
+              <p>Miners</p>
+            </span>
+          </div>
+          <div class="tab-item" :class="{'is-active': activeTab === 'asteroids'}" @click="toggleTab('asteroids')">
+            <i class="icon-asteroid"></i>
+            <span class="tab-icon-text">
+              <p>Asteroid</p>
+            </span>
+          </div>
+          <div class="tab-item" :class="{'is-active': activeTab === 'planets'}" @click="toggleTab('planets')">
+            <i class="icon-planet"></i>
+            <span class="tab-icon-text">
+              <p>Planet</p>
+            </span>
+          </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="data-table">
+        <el-table 
+            v-if="activeTab === 'miners'"
+            class="miners-table" 
+            :data="miners" 
+            header-cell-class-name="table-header-cell" 
+            cell-class-name="table-cell"
+            max-height="600">
+            <el-table-column
+                prop="name"
+                label="Name"
+                class-name="miner-name">
+            </el-table-column>
+            <el-table-column
+                prop="planet"
+                label="Planet"
+                :formatter="formatPlanetName">
+            </el-table-column>
+            <el-table-column
+                prop="carryCapacity"
+                label="carryCapacity">
+                <template slot-scope="scope">
+                    <span :style="{
+                        'color': scope.row.carryCapacity <= 0 ? '#EB5757' : (scope.row.carryCapacity >= 200 ? '#00CF67' : '')
+                    }">
+                        {{scope.row.carryCapacity}}/200
+                    </span>
+                </template>
+            </el-table-column>
+            <el-table-column
+                prop="travelSpeed"
+                label="travelSpeed">
+            </el-table-column>
+            <el-table-column
+                prop="miningSpeed"
+                label="miningSpeed">
+            </el-table-column>
+            <el-table-column
+                label="Position">
+                <template slot-scope="scope">
+                    <span>
+                        {{parseInt(scope.row.x)}},{{parseInt(scope.row.y)}}
+                    </span>
+                </template>
+            </el-table-column>
+            <el-table-column
+                prop="status"
+                label="Status"
+                :formatter="formatStatus">
+            </el-table-column>
+        </el-table>
+
+        <el-table 
+        v-if="activeTab === 'asteroids'"
+        class="asteroids-table" 
+        :data="asteroids" 
+        header-cell-class-name="table-header-cell" 
+        cell-class-name="table-cell" 
+        max-height="600">
+            <el-table-column
+                prop="name"
+                label="Name">
+            </el-table-column>
+            <el-table-column
+                prop="minerals"
+                label="Minerals">
+            </el-table-column>
+            <el-table-column
+                prop="currentMiner"
+                label="Current miner"
+                :formatter="formatCurrentMiner">
+            </el-table-column>
+            <el-table-column
+                label="Position">
+                <template slot-scope="scope">
+                    <span>
+                        {{scope.row.position.x}},{{scope.row.position.y}}
+                    </span>
+                </template>
+            </el-table-column>
+        </el-table>
+
+        <el-table 
+        v-if="activeTab === 'planets'" 
+        class="planets-table" 
+        :data="planets" 
+        header-cell-class-name="table-header-cell" 
+        cell-class-name="table-cell"
+        max-height="600">
+            <el-table-column
+                prop="name"
+                label="Name">
+            </el-table-column>
+            <el-table-column
+                prop="miners"
+                label="Miners">
+            </el-table-column>
+            <el-table-column
+                prop="minerals"
+                label="Minerals">
+                <template slot-scope="scope">
+                    <span :style="{
+                        'color': scope.row.minerals <= 0 ? '#EB5757' : (scope.row.minerals >= 1000 ? '#00CF67' : '')
+                    }">
+                        {{scope.row.minerals}}/1000
+                    </span>
+                </template>
+            </el-table-column>
+        </el-table>
+    </div>
+    
+</div>
+</body>
+    <script src="js/main.js"></script>
+</html>
