@@ -1,0 +1,500 @@
+{
+	"info": {
+		"_postman_id": "114eda04-d8fd-4b3d-bb6d-e1a5e6cbf816",
+		"name": "Asteroid",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "736688"
+	},
+	"item": [
+		{
+			"name": "Asteroids",
+			"item": [
+				{
+					"name": "Get all asteroids",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/asteroids",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"asteroids"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one asteroid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/asteroids/6359fd8364aa7d6d95df1b5c",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"asteroids",
+								"6359fd8364aa7d6d95df1b5c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create one asteroid",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"position\": {\n        \"x\": 889,\n        \"y\": 298\n    },\n    \"name\": \"Space rock 9\",\n    \"minerals\": 918,\n    \"status\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/asteroids",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"asteroids"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update one asteroid",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Space rock 9\",\n    \"position\": {\n        \"x\": 890,\n        \"y\": 230\n    },\n    \"minerals\": 907,\n    \"status\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/asteroids/6359fd8364aa7d6d95df1b5c",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"asteroids",
+								"6359fd8364aa7d6d95df1b5c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete one asteroid",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/asteroids/6359fd8364aa7d6d95df1b5c",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"asteroids",
+								"6359fd8364aa7d6d95df1b5c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Planets",
+			"item": [
+				{
+					"name": "Get all planets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/planets",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"planets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one planet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/planets/635a01dbce35ca16a3d7e845",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"planets",
+								"635a01dbce35ca16a3d7e845"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create one planet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"position\": {\n        \"x\": 565,\n        \"y\": 228\n    },\n    \"name\": \"Yavin IV\",\n    \"minerals\": 1200\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/planets",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"planets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update one planet",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"position\": {\n        \"x\": 570,\n        \"y\": 225\n    },\n    \"name\": \"Yavin IV\",\n    \"minerals\": 3000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/planets/635a01dbce35ca16a3d7e845",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"planets",
+								"635a01dbce35ca16a3d7e845"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete one planet",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/planets/635a01dbce35ca16a3d7e845",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"planets",
+								"635a01dbce35ca16a3d7e845"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Miners",
+			"item": [
+				{
+					"name": "Get all miners",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/miners",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"miners"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all miners for planet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/miners?planetId=635a01dbce35ca16a3d7e845",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"miners"
+							],
+							"query": [
+								{
+									"key": "planetId",
+									"value": "635a01dbce35ca16a3d7e845"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one miner",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/miners/635a04d381af06f7b254415e",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"miners",
+								"635a04d381af06f7b254415e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create one miner",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Millenium Falcon\",\n    \"planet\": \"635a04c981af06f7b2543fb3\",\n    \"x\": 565,\n    \"y\": 228,\n    \"angle\": 0,\n    \"carryCapacity\": 64,\n    \"travelSpeed\": 94,\n    \"miningSpeed\": 78,\n    \"status\": 0,\n    \"minerals\": 0,\n    \"target\": \"635a04c981af06f7b2543fb3\",\n    \"targetType\": \"Planet\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/miners",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"miners"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update one miner",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Millenium Falcon\",\n    \"planet\": \"635a04c981af06f7b2543fb3\",\n    \"x\": 565,\n    \"y\": 228,\n    \"target\": \"635a04c981af06f7b2543fb3\",\n    \"angle\": 0,\n    \"targetType\": \"Planet\",\n    \"carryCapacity\": 100,\n    \"travelSpeed\": 100,\n    \"miningSpeed\": 100,\n    \"status\": 0,\n    \"minerals\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/miners/635a04d381af06f7b254415e",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"miners",
+								"635a04d381af06f7b254415e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete one miner",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/miners/635a04d381af06f7b254415e",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"miners",
+								"635a04d381af06f7b254415e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "History",
+			"item": [
+				{
+					"name": "Get all history",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/history",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"history"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all history for miner",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/history?minerId=635a04c181af06f7b2543e6b",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"history"
+							],
+							"query": [
+								{
+									"key": "minerId",
+									"value": "635a04c181af06f7b2543e6b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one history",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/history/635a07e581af06f7b2549824",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"history",
+								"635a07e581af06f7b2549824"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create one history",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"capacity\": {\n        \"current\": 0,\n        \"max\": 173\n    },\n    \"speed\": {\n        \"travel\": 14,\n        \"mining\": 174\n    },\n    \"position\": {\n        \"x\": 583,\n        \"y\": 589\n    },\n    \"year\": 263,\n    \"planet\": \"635a04c181af06f7b2543e4c\",\n    \"status\": 2,\n    \"miner\": \"635a04c181af06f7b2543e6b\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/history",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"history"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update one history",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"capacity\": {\n        \"current\": 0,\n        \"max\": 173\n    },\n    \"speed\": {\n        \"travel\": 14,\n        \"mining\": 174\n    },\n    \"position\": {\n        \"x\": 583,\n        \"y\": 590\n    },\n    \"year\": 263,\n    \"planet\": \"635a04c181af06f7b2543e4c\",\n    \"status\": 2,\n    \"miner\": \"635a04c181af06f7b2543e6b\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/history/635a07e581af06f7b2549824",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"history",
+								"635a07e581af06f7b2549824"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete one history",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/history/635a07e581af06f7b2549824",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"history",
+								"635a07e581af06f7b2549824"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
