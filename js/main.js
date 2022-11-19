@@ -71,7 +71,7 @@ var app = new Vue({
             statusTypeMining: 2,
             statusTypeTransfering: 3,
             storeMinerSuccessDialogVisible: false,
-            minersListByPlanetDialogVisible: false,
+            minersListByPlanetDialogVisible: true,
             minersByPlanet: [],
             currentPlanet: {},
         }
@@ -83,6 +83,7 @@ var app = new Vue({
         //axios.defaults.withCredentials=false
         axios.defaults.crossDomain=true
         axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
+        this.listMinersByPlanet();
     },
     mounted() {
         let that = this;
@@ -205,7 +206,7 @@ var app = new Vue({
 
                         axios.post(`${that.url}/miners`, that.addMinerForm).then( res => {
                             that.addMinerDialogFormVisible = false;
-                            that.storeMinerSuccess = true;
+                            that.storeMinerSuccessDialogVisible = true;
                             console.log(res);
                         }).catch( res => {
                             console.log('Add miner faild.', res);
@@ -213,8 +214,8 @@ var app = new Vue({
                         })
 
                     //}).catch( res => {
-                        console.log('Modify planet faild.', res);
-                        return false;
+                        //console.log('Modify planet faild.', res);
+                        //return false;
                     //})
                 } else {
                     console.log('Validation Faild.');
@@ -226,7 +227,6 @@ var app = new Vue({
             let that = this;
             this.dialogLoading = true;
 
-            axios.defaults.headers.common['Access-Control-Allow-Origin'] = process.env.VUE_APP_Access_Control_Allow_Origin;
             axios.get(`${this.url}/miners?planetId=${this.currentPlanet._id}`).then(function (response) {
                 that.minersByPlanet = response.data;
             }).catch(function (error) {

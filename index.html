@@ -230,16 +230,14 @@
         </el-dialog>
 
         <el-dialog :visible.sync="minersListByPlanetDialogVisible" custom-class="miner-planet-dialog" @open="listMinersByPlanet">
-            <el-table :data="minersByPlanet">
+            <el-table 
+                :data="minersByPlanet" 
+                header-cell-class-name="table-header-cell" 
+                cell-class-name="table-cell">
                 <el-table-column
                     prop="name"
                     label="Name"
                     class-name="miner-name">
-                </el-table-column>
-                <el-table-column
-                    prop="planet"
-                    label="Planet"
-                    :formatter="formatPlanetName">
                 </el-table-column>
                 <el-table-column
                     prop="carryCapacity"
