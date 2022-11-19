@@ -17,148 +17,265 @@
 </head>
 <body>
     <div id="app">
-    <header>
-        <div class="title">
-            <span class="icon-logo"></span>
-            <h1>BACKEND&nbsp;MINER</h1>
-        </div>
-    </header>
+        <header>
+            <div class="title">
+                <span class="icon-logo"></span>
+                <h1>BACKEND&nbsp;MINER</h1>
+            </div>
+        </header>
 
-    <div class="tab">
-        <div class="tab-item" :class="{'is-active': activeTab === 'miners'}" @click="toggleTab('miners')">
-            <i class="icon-miner"></i>
-            <span class="tab-icon-text">
-              <p>Miners</p>
-            </span>
-          </div>
-          <div class="tab-item" :class="{'is-active': activeTab === 'asteroids'}" @click="toggleTab('asteroids')">
-            <i class="icon-asteroid"></i>
-            <span class="tab-icon-text">
-              <p>Asteroid</p>
-            </span>
-          </div>
-          <div class="tab-item" :class="{'is-active': activeTab === 'planets'}" @click="toggleTab('planets')">
-            <i class="icon-planet"></i>
-            <span class="tab-icon-text">
-              <p>Planet</p>
-            </span>
-          </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="data-table">
-        <el-table 
-            v-if="activeTab === 'miners'"
-            class="miners-table" 
-            :data="miners" 
-            header-cell-class-name="table-header-cell" 
-            cell-class-name="table-cell"
-            max-height="600">
-            <el-table-column
-                prop="name"
-                label="Name"
-                class-name="miner-name">
-            </el-table-column>
-            <el-table-column
-                prop="planet"
-                label="Planet"
-                :formatter="formatPlanetName">
-            </el-table-column>
-            <el-table-column
-                prop="carryCapacity"
-                label="carryCapacity">
-                <template slot-scope="scope">
-                    <span :style="{
-                        'color': scope.row.carryCapacity <= 0 ? '#EB5757' : (scope.row.carryCapacity >= 200 ? '#00CF67' : '')
-                    }">
-                        {{scope.row.carryCapacity}}/200
-                    </span>
-                </template>
-            </el-table-column>
-            <el-table-column
-                prop="travelSpeed"
-                label="travelSpeed">
-            </el-table-column>
-            <el-table-column
-                prop="miningSpeed"
-                label="miningSpeed">
-            </el-table-column>
-            <el-table-column
-                label="Position">
-                <template slot-scope="scope">
-                    <span>
-                        {{parseInt(scope.row.x)}},{{parseInt(scope.row.y)}}
-                    </span>
-                </template>
-            </el-table-column>
-            <el-table-column
-                prop="status"
-                label="Status"
-                :formatter="formatStatus">
-            </el-table-column>
-        </el-table>
-
-        <el-table 
-        v-if="activeTab === 'asteroids'"
-        class="asteroids-table" 
-        :data="asteroids" 
-        header-cell-class-name="table-header-cell" 
-        cell-class-name="table-cell" 
-        max-height="600">
-            <el-table-column
-                prop="name"
-                label="Name">
-            </el-table-column>
-            <el-table-column
-                prop="minerals"
-                label="Minerals">
-            </el-table-column>
-            <el-table-column
-                prop="currentMiner"
-                label="Current miner"
-                :formatter="formatCurrentMiner">
-            </el-table-column>
-            <el-table-column
-                label="Position">
-                <template slot-scope="scope">
-                    <span>
-                        {{scope.row.position.x}},{{scope.row.position.y}}
-                    </span>
-                </template>
-            </el-table-column>
-        </el-table>
-
-        <el-table 
-        v-if="activeTab === 'planets'" 
-        class="planets-table" 
-        :data="planets" 
-        header-cell-class-name="table-header-cell" 
-        cell-class-name="table-cell"
-        max-height="600">
-            <el-table-column
-                prop="name"
-                label="Name">
-            </el-table-column>
-            <el-table-column
-                prop="miners"
-                label="Miners">
-            </el-table-column>
-            <el-table-column
-                prop="minerals"
-                label="Minerals">
-                <template slot-scope="scope">
-                    <span :style="{
-                        'color': scope.row.minerals <= 0 ? '#EB5757' : (scope.row.minerals >= 1000 ? '#00CF67' : '')
-                    }">
-                        {{scope.row.minerals}}/1000
-                    </span>
-                </template>
-            </el-table-column>
-        </el-table>
-    </div>
+        <main>
+            <div id="detail">
+                <div class="tab">
+                    <div class="tab-item" :class="{'is-active': activeTab === 'miners'}" @click="toggleTab('miners')">
+                        <i class="icon-miner"></i>
+                        <span class="tab-icon-text">
+                        <p>Miners</p>
+                        </span>
+                    </div>
+                    <div class="tab-item" :class="{'is-active': activeTab === 'asteroids'}" @click="toggleTab('asteroids')">
+                        <i class="icon-asteroid"></i>
+                        <span class="tab-icon-text">
+                        <p>Asteroid</p>
+                        </span>
+                    </div>
+                    <div class="tab-item" :class="{'is-active': activeTab === 'planets'}" @click="toggleTab('planets')">
+                        <i class="icon-planet"></i>
+                        <span class="tab-icon-text">
+                        <p>Planet</p>
+                        </span>
+                    </div>
+                </div>
+            
+                <div class="divider"></div>
+            
+                <div class="data-table">
+                    <el-table 
+                        v-if="activeTab === 'miners'"
+                        class="miners-table" 
+                        :data="miners" 
+                        header-cell-class-name="table-header-cell" 
+                        cell-class-name="table-cell"
+                        max-height="600">
+                        <el-table-column
+                            prop="name"
+                            label="Name"
+                            class-name="miner-name">
+                        </el-table-column>
+                        <el-table-column
+                            prop="planet"
+                            label="Planet"
+                            :formatter="formatPlanetName">
+                        </el-table-column>
+                        <el-table-column
+                            prop="carryCapacity"
+                            label="carryCapacity">
+                            <template slot-scope="scope">
+                                <span :style="{
+                                    'color': scope.row.carryCapacity <= 0 ? '#EB5757' : (scope.row.carryCapacity >= 200 ? '#00CF67' : '')
+                                }">
+                                    {{scope.row.carryCapacity}}/200
+                                </span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column
+                            prop="travelSpeed"
+                            label="travelSpeed">
+                        </el-table-column>
+                        <el-table-column
+                            prop="miningSpeed"
+                            label="miningSpeed">
+                        </el-table-column>
+                        <el-table-column
+                            label="Position">
+                            <template slot-scope="scope">
+                                <span>
+                                    {{parseInt(scope.row.x)}},{{parseInt(scope.row.y)}}
+                                </span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column
+                            prop="status"
+                            label="Status"
+                            :formatter="formatStatus">
+                        </el-table-column>
+                    </el-table>
+            
+                    <el-table 
+                    v-if="activeTab === 'asteroids'"
+                    class="asteroids-table" 
+                    :data="asteroids" 
+                    header-cell-class-name="table-header-cell" 
+                    cell-class-name="table-cell" 
+                    max-height="600">
+                        <el-table-column
+                            prop="name"
+                            label="Name">
+                        </el-table-column>
+                        <el-table-column
+                            prop="minerals"
+                            label="Minerals">
+                        </el-table-column>
+                        <el-table-column
+                            prop="currentMiner"
+                            label="Current miner"
+                            :formatter="formatCurrentMiner">
+                        </el-table-column>
+                        <el-table-column
+                            label="Position">
+                            <template slot-scope="scope">
+                                <span>
+                                    {{scope.row.position.x}},{{scope.row.position.y}}
+                                </span>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+            
+                    <el-table 
+                    v-if="activeTab === 'planets'" 
+                    class="planets-table" 
+                    :data="planets" 
+                    header-cell-class-name="table-header-cell" 
+                    cell-class-name="table-cell"
+                    max-height="600">
+                        <el-table-column
+                            prop="name"
+                            label="Name">
+                        </el-table-column>
+                        <el-table-column
+                            prop="miners"
+                            label="Miners">
+                        </el-table-column>
+                        <el-table-column
+                            prop="minerals"
+                            label="Minerals">
+                            <template slot-scope="scope">
+                                <span :style="{
+                                    'color': scope.row.minerals <= 0 ? '#EB5757' : (scope.row.minerals >= 1000 ? '#00CF67' : '')
+                                }">
+                                    {{scope.row.minerals}}/1000
+                                </span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column>
+                            <template slot="header" slot-scope="scope">
+                                
+                            </template>
+                            <template slot-scope="scope">
+                                <div class="btn-add-miner" v-if="scope.row.minerals >= 0" @click="createMiner(scope.row._id)">
+                                    <i class="icon-add-miner"></i>
+                                    <span>Create a Miner</span>
+                                </div>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </div>
+            </div>
     
-</div>
+            <div id="chart">
+                <div class="years">
+                    <span>
+                        {{years}} YEARS
+                    </span>
+                </div>
+                <div class="animation">
+                    <img src="./asset/img/background-main.png" alt="">
+                    <img src="./asset/img/background-grid.png" alt="">
+                    <img src="./asset/img/background-stars.png" alt="">
+                </div>
+            </div>
+        </main>
+
+        <!-- dialog -->
+        <el-dialog :visible.sync="addMinerDialogFormVisible" custom-class="add-miner-form" center>
+            <div slot="title" style="display: none;">
+            </div>
+            <div class="dialog-header">
+                <span class="dialog-title-text">Create a miner</span>
+            </div>
+            <el-form :model="addMinerForm" ref="addMinerForm" :rules="addMinerFormRules" hide-required-asterisk>
+              <el-form-item size="mini" label="Name" prop="name">
+                <el-input size="mini" v-model="addMinerForm.name" autocomplete="off"></el-input>
+              </el-form-item>
+              <el-form-item size="mini" label="Planet" prop="planet">
+                <el-select size="mini" v-model="addMinerForm.planet" placeholder="" popper-class="planets-dropdown">
+                  <el-option v-for="(item,index) in planetOptions" :label="item.name" :value="item.id" :key="index"></el-option>
+                </el-select>
+              </el-form-item>
+              <div class="dialog-header">
+                <span class="dialog-title-text">Assign point</span>
+              </div>
+              <div class="assign-point">
+                <el-form-item size="mini" label="carryCapacity" prop="carryCapacity">
+                    <el-input-number :min=0 step-strictly controls-position="right" :controls=false size="mini" v-model="addMinerForm.carryCapacity" autocomplete="off"></el-input>
+                  </el-form-item>
+                  <el-form-item size="mini" label="travelSpeed" prop="travelSpeed">
+                    <el-input-number :min=0 step-strictly controls-position="right" :controls=false size="mini" required v-model="addMinerForm.travelSpeed" autocomplete="off"></el-input>
+                  </el-form-item>
+                  <el-form-item size="mini" label="miningSpeed" prop="miningSpeed">
+                    <el-input-number :min=0 step-strictly controls-position="right" :controls=false size="mini" required v-model="addMinerForm.miningSpeed" autocomplete="off"></el-input>
+                  </el-form-item>
+              </div>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+              <el-button size="mini" plain @click="storeMiner('addMinerForm')">Save</el-button>
+            </div>
+        </el-dialog>
+
+        <el-dialog
+            :visible.sync="storeMinerSuccessDialogVisible"
+            custom-class="add-miner-tip"
+            @closed="minersListByPlanetDialogVisible = true">
+            <span>The miner was successfully created</span>
+        </el-dialog>
+
+        <el-dialog :visible.sync="minersListByPlanetDialogVisible" custom-class="miner-planet-dialog" @open="listMinersByPlanet">
+            <el-table :data="minersByPlanet">
+                <el-table-column
+                    prop="name"
+                    label="Name"
+                    class-name="miner-name">
+                </el-table-column>
+                <el-table-column
+                    prop="planet"
+                    label="Planet"
+                    :formatter="formatPlanetName">
+                </el-table-column>
+                <el-table-column
+                    prop="carryCapacity"
+                    label="carryCapacity">
+                    <template slot-scope="scope">
+                        <span :style="{
+                            'color': scope.row.carryCapacity <= 0 ? '#EB5757' : (scope.row.carryCapacity >= 200 ? '#00CF67' : '')
+                        }">
+                            {{scope.row.carryCapacity}}/200
+                        </span>
+                    </template>
+                </el-table-column>
+                <el-table-column
+                    prop="travelSpeed"
+                    label="travelSpeed">
+                </el-table-column>
+                <el-table-column
+                    prop="miningSpeed"
+                    label="miningSpeed">
+                </el-table-column>
+                <el-table-column
+                    label="Position">
+                    <template slot-scope="scope">
+                        <span>
+                            {{parseInt(scope.row.x)}},{{parseInt(scope.row.y)}}
+                        </span>
+                    </template>
+                </el-table-column>
+                <el-table-column
+                    prop="status"
+                    label="Status"
+                    :formatter="formatStatus">
+                </el-table-column>
+            </el-table>
+          </el-dialog>
+    </div>
 </body>
     <script src="js/main.js"></script>
 </html>

@@ -6,6 +6,12 @@ header {
     width: 100%;
     height: 60px;
 }
+main {
+    display: flex;
+}
+#detail, #chart {
+    width: 50%;
+}
 .title {
     margin-top: 16px;
     margin-left: 26px;
@@ -78,7 +84,7 @@ header {
 }
 
 .data-table {
-    width: 50%;
+    width: 100%;
 }
 .data-table .miners-table, .data-table .asteroids-table, .data-table .planets-table {
     width: 90%;
@@ -119,5 +125,171 @@ header {
     font-style: normal;
     font-weight: 700;
     font-size: 11px;
+}
+.years {
+    margin-bottom: 12px;
+}
+.years span {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+.animation {
+    width: 800px;
+    height: 800px;
+}
+.animation img {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+}
+.btn-add-miner {
     cursor: pointer;
+}
+.btn-add-miner span{
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 11px;
+    color: #00F0FF;
+}
+.btn-add-miner i {
+    color: #00F0FF;
+}
+.add-miner-form {
+    width: 447px !important;
+    height: 447px !important;
+    background: #1A1B2F !important;
+    box-shadow: 0px 16px 24px rgba(12, 13, 33, 0.6) !important;
+    border-radius: 12px !important;
+}
+.el-dialog__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dialog-title-text {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+    color: #FFFFFF;
+}
+.dialog-header {
+    margin-top: 32px;
+    text-align: center;
+}
+.el-form-item__label {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px !important;
+    color: #9499C3 !important;
+}
+.el-select {
+    width: 100%;
+}
+.el-input__inner {
+    background: #242538 !important;
+    border: 1px solid #1A1C31 !important;
+    border-radius: 4px !important;
+}
+.assign-point {
+    display: flex;
+    margin-top: 27px;
+    justify-content: space-around;
+}
+.assign-point .el-input__inner {
+    width: 125px;
+}
+.el-dialog--center .el-dialog__body {
+    text-align: initial;
+    padding: 0px 25px 15px !important;
+}
+.el-dialog__header {
+    padding: 0px 20px 10px !important;
+}
+.dialog-footer .el-button {
+    width: 91px;
+    height: 28px;
+    background: #E1E2EF;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+.dialog-footer .el-button span {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 12px;
+    color: #1A1B2F;
+}
+.el-form-item.is-error .el-input__inner {
+    border: 1px solid #EB5757 !important;
+    border-radius: 4px !important;
+}
+.el-form-item__error {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 9px !important;
+    /* Red */
+    color: #EB5757 !important;
+    padding-top: 4px !important;
+}
+.el-input-number.is-without-controls .el-input__inner {
+    padding: 0 15px;
+    text-align: left;
+}
+.planets-dropdown {
+  background-color: #1A1B2F !important;
+  border: none !important;
+
+}
+.el-select-dropdown__item.hover, 
+.el-select-dropdown__item:hover{
+  background-color: #08164d !important;
+}
+.el-dialog__headerbtn {
+    width: 24px;
+    height: 24px;
+    background: url('../asset/img/delete-circled-outline.png') !important;
+    background-size: cover !important;
+}
+.el-dialog__headerbtn i{
+    display: none;
+}
+.add-miner-tip {
+    width: 447px !important;
+    height: 136px !important;
+    background: #1A1B2F !important;
+    box-shadow: 0px 16px 24px rgba(12, 13, 33, 0.6) !important;
+    border-radius: 12px !important;
+}
+.add-miner-tip .el-dialog__body {
+    margin: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+}
+.add-miner-tip .el-dialog__body span {
+    white-space: nowrap;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+    color: #FFFFFF;
+}
+.miner-planet-dialog {
+    width: 549px !important;
+    height: auto !important;
+    background: #1A1B2F !important;
+    box-shadow: 0px 16px 24px rgba(12, 13, 33, 0.6) !important;
+    border-radius: 12px !important;
 }
