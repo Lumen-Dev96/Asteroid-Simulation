@@ -125,12 +125,7 @@ var app = new Vue({
             if (row.currentMiner == null) {
                 return minertName;
             }
-            this.minerOptions.forEach(element => {
-                if (element.id === row.currentMiner) {
-                    minertName = element.name
-                }
-            });
-            return minertName;
+            return row.currentMiner.name;
         },
         findTargetAsteroid(miner) {
             let that = this;
