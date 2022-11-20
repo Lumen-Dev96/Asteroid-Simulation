@@ -178,9 +178,35 @@
                     </span>
                 </div>
                 <div class="animation">
-                    <img src="./asset/img/background-main.png" alt="">
-                    <img src="./asset/img/background-grid.png" alt="">
-                    <img src="./asset/img/background-stars.png" alt="">
+                    <div class="bg">
+                        <img src="./asset/img/background-universe.png" alt="">
+                        <img src="./asset/img/background-grid.png" alt="">
+                        <img src="./asset/img/background-stars.png" alt="">
+                    </div>
+
+                    <div class="planets-img">
+                        <div class="planets-item" :style="{left: planets[0].position.x + 'px', top: planets[0].position.y + 'px'}">
+                            <img src="./asset/img/planet-1.png" alt="">
+                            <span :style="{color: planets[0].minerals >= 1000 ? '#00CF67' : ''}">{{planets[0].minerals}}/1000</span>
+                        </div>
+                        <div class="planets-item" :style="{left: planets[1].position.x + 'px', top: planets[1].position.y + 'px'}">
+                            <img src="./asset/img/planet-2.png" alt="">
+                            <span :style="{color: planets[1].minerals >= 1000 ? '#00CF67' : ''}">{{planets[1].minerals}}/1000</span>
+                        </div>
+                        <div class="planets-item" :style="{left: planets[2].position.x + 'px', top: planets[2].position.y + 'px'}">
+                            <img src="./asset/img/planet-3.png" alt="">
+                            <span :style="{color: planets[2].minerals >= 1000 ? '#00CF67' : ''}">{{planets[2].minerals}}/1000</span>
+                        </div>                        
+                    </div>
+
+                    <div class="asteroids-img">
+                        <img v-for="asteroid in asteroids" src="./asset/img/asteroid.png" :style="{left: asteroid.position.x + 'px', top: asteroid.position.y + 'px'}">
+                    </div>
+
+                    <div class="miners-img">
+                        <img v-for="miner in miners" src="./asset/img/miner.png" :style="{left: miner.x + 'px', top: miner.y + 'px', transform: `rotate(${miner.angle}deg)`}">
+                    </div>
+
                 </div>
             </div>
         </main>

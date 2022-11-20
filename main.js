@@ -81,7 +81,6 @@ var app = new Vue({
         }
     },
     computed: {
-        
     },
     created() {
         socket.on('connect', function() {
@@ -206,7 +205,7 @@ var app = new Vue({
                     //construct form
                     that.initialMinerForm();
                     
-                    axios.put(`${that.url}/planets/${that.currentPlanet._id}`, {'minerals':that.currentPlanet.minerals - 1000}).then( res => {
+                    // axios.put(`${that.url}/planets/${that.currentPlanet._id}`, {'minerals':that.currentPlanet.minerals - 1000}).then( res => {
 
                         axios.post(`${that.url}/miners`, that.addMinerForm).then( res => {
                             that.addMinerDialogFormVisible = false;
@@ -217,10 +216,10 @@ var app = new Vue({
                             return false;
                         })
 
-                    }).catch( res => {
-                        console.log('Modify planet faild.', res);
-                        return false;
-                    })
+                    // }).catch( res => {
+                    //     console.log('Modify planet faild.', res);
+                    //     return false;
+                    // })
                 } else {
                     console.log('Validation Faild.');
                     return false;
@@ -237,26 +236,6 @@ var app = new Vue({
                 console.log(error);
             })
             this.dialogLoading = false;
-        }
-    },
-    sockets: {
-        connecting() {
-          console.log('socket connecting')
-        },
-        disconnect() {
-          console.log('Socket disconnect')
-        },
-        connect_failed() {
-          console.log('socket connect fail')
-        },
-        connect() {
-          console.log('socket connected')
-        },
-        news(data) {
-          console.log(data)
-        },
-        open(data) {
-          console.log(data)
         }
     }
 })
