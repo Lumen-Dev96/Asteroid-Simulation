@@ -1,3 +1,6 @@
+// socket.io
+
+
 var app = new Vue({
     el: "#app",
     data() {
@@ -46,8 +49,7 @@ var app = new Vue({
             minerOptions: [],
             asteroids: [],
             planets: [],
-            planetOptions: [],
-            years: 0,
+            currentTick: 0,
             addMinerDialogFormVisible: false,
             addMinerForm: {},
             addMinerFormRules: {
@@ -71,59 +73,33 @@ var app = new Vue({
             statusTypeMining: 2,
             statusTypeTransfering: 3,
             storeMinerSuccessDialogVisible: false,
-            minersListByPlanetDialogVisible: true,
+            minersListByPlanetDialogVisible: false,
             minersByPlanet: [],
             currentPlanet: {},
+            asteroidHasMinerals: 0,
+            asteroidDepleted: 1,
         }
     },
     computed: {
         
     },
     created() {
-        //axios.defaults.withCredentials=false
-        axios.defaults.crossDomain=true
-        axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
-        this.listMinersByPlanet();
+        socket.on('connect', function() {
+            console.log("Connected to WS server", socket.connected);
+        });
+        socket.on('tick', (data) => {
+            this.miners = data.miners;
+            this.asteroids = data.asteroids;
+            this.planets = data.planets;
+            this.currentTick = data.currentTick;
+        });
     },
     mounted() {
-        let that = this;
-        window.timer = setInterval(() => {
-            setTimeout(this.runGame(), 0)
-          }, 1000);
-
-        axios.get(`${this.url}/planets`).then(function (response) {
-            that.planets = response.data;
-            that.planets.forEach(element => {
-                that.planetOptions.push(
-                    {id:element._id, name:element.name}
-                );
-            });
-        }).catch(function (error) {
-            console.log(error);
-        })
-
-        this.requestListMiners();
-
-        axios.get(`${this.url}/asteroids`).then(function (response) {
-            that.asteroids = response.data;
-        }).catch(function (error) {
-            console.log(error);
-        })
-
         
     },
     methods: {
         toggleTab(tab) {
             this.activeTab = tab;
-        },
-        formatPlanetName(row, column) {
-            let planetName = 'unknown';
-            this.planetOptions.forEach(element => {
-                if (element.id == row.planet) {
-                    planetName = element.name;
-                }
-            });
-            return planetName;
         },
         formatStatus(row, column) {
             let status = '';
@@ -157,8 +133,36 @@ var app = new Vue({
             });
             return minertName;
         },
-        runGame() {
-            this.years++;
+        findTargetAsteroid(miner) {
+            let that = this;
+
+            //find asteroids have been targetd
+            let unavaliableAsteroids = [];
+            this.miners.forEach(element => {
+                if (element.targetType === that.targetTypeAsteroid) {
+                    unavaliableAsteroids.push(element.target);
+                }
+            });
+            //find asteroid might be a target
+            let avaliableAsteroids = this.asteroids.filter(element => {
+                if (unavaliableAsteroids.includes(element._id)) {
+                    return false;
+                }
+                return element.status === that.asteroidHasMinerals;
+            });
+            //calculate distance
+            avaliableAsteroids.map(asteroid => {
+                let currDistance = Math.sqrt(Math.pow((asteroid.position.x - miner.x), 2) + Math.pow((asteroid.position.y - miner.y), 2));
+                asteroid.distance = currDistance;
+            });
+            //return
+            if (avaliableAsteroids.length <= 1) {
+                return avaliableAsteroids;
+            }
+            //sort by distance asc
+            avaliableAsteroids.sort((a,b)=>{ return a.distance - b.distance})
+            //return
+            return avaliableAsteroids[0];
         },
         requestListMiners() {
             let that = this;
@@ -202,7 +206,7 @@ var app = new Vue({
                     //construct form
                     that.initialMinerForm();
                     
-                    //axios.put(`${that.url}/planets/${that.currentPlanet._id}`, {'minerals':that.currentPlanet.minerals - 1000}).then( res => {
+                    axios.put(`${that.url}/planets/${that.currentPlanet._id}`, {'minerals':that.currentPlanet.minerals - 1000}).then( res => {
 
                         axios.post(`${that.url}/miners`, that.addMinerForm).then( res => {
                             that.addMinerDialogFormVisible = false;
@@ -213,10 +217,10 @@ var app = new Vue({
                             return false;
                         })
 
-                    //}).catch( res => {
-                        //console.log('Modify planet faild.', res);
-                        //return false;
-                    //})
+                    }).catch( res => {
+                        console.log('Modify planet faild.', res);
+                        return false;
+                    })
                 } else {
                     console.log('Validation Faild.');
                     return false;
@@ -233,6 +237,26 @@ var app = new Vue({
                 console.log(error);
             })
             this.dialogLoading = false;
+        }
+    },
+    sockets: {
+        connecting() {
+          console.log('socket connecting')
+        },
+        disconnect() {
+          console.log('Socket disconnect')
+        },
+        connect_failed() {
+          console.log('socket connect fail')
+        },
+        connect() {
+          console.log('socket connected')
+        },
+        news(data) {
+          console.log(data)
+        },
+        open(data) {
+          console.log(data)
         }
     }
 })

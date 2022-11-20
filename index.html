@@ -63,18 +63,17 @@
                             class-name="miner-name">
                         </el-table-column>
                         <el-table-column
-                            prop="planet"
-                            label="Planet"
-                            :formatter="formatPlanetName">
+                            prop="planet.name"
+                            label="Planet">
                         </el-table-column>
                         <el-table-column
                             prop="carryCapacity"
                             label="carryCapacity">
                             <template slot-scope="scope">
                                 <span :style="{
-                                    'color': scope.row.carryCapacity <= 0 ? '#EB5757' : (scope.row.carryCapacity >= 200 ? '#00CF67' : '')
+                                    'color': scope.row.minerals >= scope.row.carryCapacity ? '#00CF67' : (scope.row.minerals == 0 ? '#EB5757' : '')
                                 }">
-                                    {{scope.row.carryCapacity}}/200
+                                    {{scope.row.minerals}}/{{scope.row.carryCapacity}}
                                 </span>
                             </template>
                         </el-table-column>
@@ -175,7 +174,7 @@
             <div id="chart">
                 <div class="years">
                     <span>
-                        {{years}} YEARS
+                        {{currentTick}} YEARS
                     </span>
                 </div>
                 <div class="animation">
@@ -199,7 +198,7 @@
               </el-form-item>
               <el-form-item size="mini" label="Planet" prop="planet">
                 <el-select size="mini" v-model="addMinerForm.planet" placeholder="" popper-class="planets-dropdown">
-                  <el-option v-for="(item,index) in planetOptions" :label="item.name" :value="item.id" :key="index"></el-option>
+                  <el-option v-for="(item,index) in planets" :label="item.name" :value="item._id" :key="index"></el-option>
                 </el-select>
               </el-form-item>
               <div class="dialog-header">
@@ -244,9 +243,9 @@
                     label="carryCapacity">
                     <template slot-scope="scope">
                         <span :style="{
-                            'color': scope.row.carryCapacity <= 0 ? '#EB5757' : (scope.row.carryCapacity >= 200 ? '#00CF67' : '')
+                            'color': scope.row.minerals >= scope.row.carryCapacity ? '#00CF67' : (scope.row.minerals == 0 ? '#EB5757' : '')
                         }">
-                            {{scope.row.carryCapacity}}/200
+                            {{scope.row.minerals}}/{{scope.row.carryCapacity}}
                         </span>
                     </template>
                 </el-table-column>
@@ -274,6 +273,10 @@
             </el-table>
           </el-dialog>
     </div>
+    <script src="https://asteroids.dev.mediasia.cn/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io.connect('https://asteroids.dev.mediasia.cn');
+    </script>
+    <script src="./main.js"></script>
 </body>
-    <script src="js/main.js"></script>
 </html>
