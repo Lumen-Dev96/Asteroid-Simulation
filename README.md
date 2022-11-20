@@ -1,6 +1,8 @@
 # Asteroid-Simulation
 
-<summary>Table of content</summary>
+
+
+[toc]
 
 ## Abstract
 
